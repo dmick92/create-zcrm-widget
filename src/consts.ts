@@ -15,5 +15,5 @@ export const TITLE_TEXT = `
   / / \\/ | >< | \\/ | | \\_| v / \\_/ | | 'V' || | v | [/\\ _|  | |   
  |___\\__/|_||_|\\__/   \\__/_|_\\_| |_| !_/ \\_!|_|__/ \\__/___| |_|
 `;
-export const DEFAULT_APP_NAME = "my-t3-app";
-export const CREATE_T3_APP = "create-zcrm-widget";
+export const DEFAULT_APP_NAME = "my-zcrm-widget";
+export const CREATE_ZCRM_WIDGET = "create-zcrm-widget";
