@@ -1,6 +1,6 @@
 {
   "name": "create-zcrm-widget",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Create Zoho CRM widgets using React and Vite.",
   "license": "MIT",
   "repository": {
