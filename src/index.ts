@@ -35,11 +35,11 @@ const main = async () => {
 
   const {
     appName,
-    //packages,
+    packages,
     flags: { noGit, noInstall, importAlias },
   } = await runCli();
 
-  //const usePackages = buildPkgInstallerMap(packages, databaseProvider);
+  const usePackages = buildPkgInstallerMap(packages);
 
   // e.g. dir/@mono/app returns ["@mono/app", "dir/app"]
   const [scopedAppName, appDir] = parseNameAndPath(appName);
@@ -47,7 +47,7 @@ const main = async () => {
   const projectDir = await createProject({
     projectName: appDir,
     scopedAppName,
-    //packages: usePackages,
+    packages: usePackages,
     importAlias,
     noInstall,
   });
@@ -86,7 +86,7 @@ const main = async () => {
 
   await logNextSteps({
     projectName: appDir,
-    //packages: usePackages,
+    packages: usePackages,
     noInstall,
     projectDir,
   });

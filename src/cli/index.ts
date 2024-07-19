@@ -24,35 +24,23 @@ interface CliFlags {
   /** @internal Used in CI. */
   tailwind: boolean;
   /** @internal Used in CI. */
-  trpc: boolean;
-  /** @internal Used in CI. */
-  prisma: boolean;
-  /** @internal Used in CI. */
-  drizzle: boolean;
-  /** @internal Used in CI. */
-  nextAuth: boolean;
-  /** @internal Used in CI. */
 }
 
 interface CliResults {
   appName: string;
-  // packages: AvailablePackages[];
+  packages: AvailablePackages[];
   flags: CliFlags;
 }
 
 const defaultOptions: CliResults = {
   appName: DEFAULT_APP_NAME,
-  //packages: ["nextAuth", "prisma", "tailwind", "trpc"],
+  packages: ["tailwind"],
   flags: {
     noGit: false,
     noInstall: false,
     default: false,
     CI: false,
     tailwind: false,
-    trpc: false,
-    prisma: false,
-    drizzle: false,
-    nextAuth: false,
     importAlias: "~/",
   },
 };
@@ -92,12 +80,6 @@ export const runCli = async (): Promise<CliResults> => {
     .option(
       "--tailwind [boolean]",
       "Experimental: Boolean value if we should install Tailwind CSS. Must be used in conjunction with `--CI`.",
-      (value) => !!value && value !== "false"
-    )
-    /** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
-    .option(
-      "--trpc [boolean]",
-      "Experimental: Boolean value if we should install tRPC. Must be used in conjunction with `--CI`.",
       (value) => !!value && value !== "false"
     )
     /** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
@@ -179,11 +161,6 @@ export const runCli = async (): Promise<CliResults> => {
             message: "Will you be using Tailwind CSS for styling?",
           });
         },
-        // trpc: () => {
-        //   return p.confirm({
-        //     message: "Would you like to use tRPC?",
-        //   });
-        // },
         versioning: () => {
           return p.select({
             message: "What versioning system would you like to use?",
@@ -230,16 +207,12 @@ export const runCli = async (): Promise<CliResults> => {
       }
     );
 
-    // const packages: AvailablePackages[] = [];
-    // if (project.styling) packages.push("tailwind");
-    // if (project.trpc) packages.push("trpc");
-    // if (project.authentication === "next-auth") packages.push("nextAuth");
-    // if (project.database === "prisma") packages.push("prisma");
-    // if (project.database === "drizzle") packages.push("drizzle");
+    const packages: AvailablePackages[] = [];
+    if (project.styling) packages.push("tailwind");
 
     return {
       appName: project.name ?? cliResults.appName,
-      //packages,
+      packages,
       flags: {
         ...cliResults.flags,
         noGit: !project.git || cliResults.flags.noGit,
