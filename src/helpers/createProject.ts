@@ -17,7 +17,7 @@ import { getUserPkgManager } from "~/utils/getUserPkgManager.js";
 
 interface CreateProjectOptions {
   projectName: string;
-  //packages: PkgInstallerMap;
+  packages: PkgInstallerMap;
   scopedAppName: string;
   noInstall: boolean;
   importAlias: string;
@@ -26,7 +26,7 @@ interface CreateProjectOptions {
 export const createProject = async ({
   projectName,
   scopedAppName,
-  //packages,
+  packages,
   noInstall,
 }: CreateProjectOptions) => {
   const pkgManager = getUserPkgManager();
@@ -47,7 +47,7 @@ export const createProject = async ({
     scopedAppName,
     projectDir,
     pkgManager,
-    //packages,
+    packages,
     noInstall,
   });
 
@@ -68,19 +68,19 @@ export const createProject = async ({
   // selectAppFile({ projectDir, packages });
   // selectIndexFile({ projectDir, packages });
   // // If no tailwind, select use css modules
-  // if (!packages.tailwind.inUse) {
-  //   const indexModuleCss = path.join(
-  //     PKG_ROOT,
-  //     "template/extras/src/index.module.css"
-  //   );
-  //   const indexModuleCssDest = path.join(
-  //     projectDir,
-  //     "src",
-  //     appRouter ? "app" : "pages",
-  //     "index.module.css"
-  //   );
-  //   fs.copyFileSync(indexModuleCss, indexModuleCssDest);
-  // }
+  if (!packages.tailwind.inUse) {
+    const indexModuleCss = path.join(
+      PKG_ROOT,
+      "template/extras/src/index.module.css"
+    );
+    const indexModuleCssDest = path.join(
+      projectDir,
+      "src",
+      //appRouter ? "app" : "pages",
+      "index.module.css"
+    );
+    fs.copyFileSync(indexModuleCss, indexModuleCssDest);
+  }
 
   return projectDir;
 };

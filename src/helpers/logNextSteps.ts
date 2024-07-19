@@ -7,13 +7,13 @@ import { isInsideGitRepo, isRootGitRepo } from "./git.js";
 // This logs the next steps that the user should take in order to advance the project
 export const logNextSteps = async ({
   projectName = DEFAULT_APP_NAME,
-  //packages,
+  packages,
   noInstall,
   projectDir,
 }: Pick<
   InstallerOptions,
   | "projectName"
-  // | "packages"
+  | "packages"
   | "noInstall"
   | "projectDir"
 >) => {
@@ -29,15 +29,6 @@ export const logNextSteps = async ({
       logger.info(`  ${pkgManager} install`);
     }
   }
-
-
-  // if (packages?.prisma.inUse || packages?.drizzle.inUse) {
-  //   if (["npm", "bun"].includes(pkgManager)) {
-  //     logger.info(`  ${pkgManager} run db:push`);
-  //   } else {
-  //     logger.info(`  ${pkgManager} db:push`);
-  //   }
-  // }
 
   if (["npm", "bun"].includes(pkgManager)) {
     logger.info(`  ${pkgManager} run dev`);
