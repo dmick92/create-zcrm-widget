@@ -17,6 +17,7 @@ export const tailwindInstaller: Installer = ({ projectDir }) => {
     devMode: true,
   });
 
+  const baseDir = path.join(PKG_ROOT, "template/base");
   const extrasDir = path.join(PKG_ROOT, "template/extras");
 
   const twCfgSrc = path.join(extrasDir, "config/tailwind.config.ts");
@@ -30,6 +31,14 @@ export const tailwindInstaller: Installer = ({ projectDir }) => {
 
   const cssSrc = path.join(extrasDir, "src/styles/globals.css");
   const cssDest = path.join(projectDir, "src/styles/globals.css");
+
+  const mainFile = path.join(projectDir, "src/main.tsx");
+
+  fs.readFile(mainFile, "utf8", (err, data) => {
+    if (err) throw err;
+    const newData = data.replace("import './index.css'", `import './styles/globals.css'`);
+    fs.writeFileSync(mainFile, newData);
+  });
 
   fs.copySync(twCfgSrc, twCfgDest);
   fs.copySync(postcssCfgSrc, postcssCfgDest);
