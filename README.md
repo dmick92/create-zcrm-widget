@@ -14,5 +14,5 @@ To scaffold an app using `create-zcrm-widget`, run any of the following commands
 ### npm
 
 ```bash
-npm create t3-app@latest
+npm create zcrm-widget@latest
 ```

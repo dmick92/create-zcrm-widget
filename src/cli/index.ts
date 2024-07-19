@@ -2,11 +2,11 @@ import * as p from "@clack/prompts";
 import chalk from "chalk";
 import { Command } from "commander";
 
-import { CREATE_T3_APP, DEFAULT_APP_NAME } from "~/consts.js";
+import { CREATE_ZCRM_WIDGET, DEFAULT_APP_NAME } from "~/consts.js";
 import {
   type AvailablePackages,
 } from "~/installers/index.js";
-import { getVersion } from "~/utils/getT3Version.js";
+import { getVersion } from "~/utils/getVersion.js";
 import { getUserPkgManager } from "~/utils/getUserPkgManager.js";
 import { IsTTYError } from "~/utils/isTTYError.js";
 import { logger } from "~/utils/logger.js";
@@ -49,7 +49,7 @@ export const runCli = async (): Promise<CliResults> => {
   const cliResults = defaultOptions;
 
   const program = new Command()
-    .name(CREATE_T3_APP)
+    .name(CREATE_ZCRM_WIDGET)
     .description("A CLI for creating Zoho CRM widgets using React and Vite.")
     .argument(
       "[dir]",
@@ -67,7 +67,7 @@ export const runCli = async (): Promise<CliResults> => {
     )
     .option(
       "-y, --default",
-      "Bypass the CLI and use all default options to bootstrap a new t3-app",
+      "Bypass the CLI and use all default options to bootstrap a new zcrm-widget",
       false
     )
     /** START CI-FLAGS */
@@ -92,14 +92,6 @@ export const runCli = async (): Promise<CliResults> => {
     .version(getVersion(), "-v, --version", "Display the version number")
     .parse(process.argv);
 
-  // FIXME: TEMPORARY WARNING WHEN USING YARN 3. SEE ISSUE #57
-  if (process.env.npm_config_user_agent?.startsWith("yarn/3")) {
-    logger.warn(`  WARNING: It looks like you are using Yarn 3. This is currently not supported,
-  and likely to result in a crash. Please run create-t3-app with another
-  package manager such as pnpm, npm, or Yarn Classic.
-  See: https://github.com/t3-oss/create-t3-app/issues/57`);
-  }
-
   // Needs to be separated outside the if statement to correctly infer the type as string | undefined
   const cliProvidedName = program.args[0];
   if (cliProvidedName) {
@@ -116,8 +108,7 @@ export const runCli = async (): Promise<CliResults> => {
   try {
     if (process.env.TERM_PROGRAM?.toLowerCase().includes("mintty")) {
       logger.warn(`  WARNING: It looks like you are using MinTTY, which is non-interactive. This is most likely because you are
-  using Git Bash. If that's that case, please use Git Bash from another terminal, such as Windows Terminal. Alternatively, you
-  can provide the arguments from the CLI directly: https://create.t3.gg/en/installation#experimental-usage to skip the prompts.`);
+  using Git Bash. If that's that case, please use Git Bash from another terminal, such as Windows Terminal.`);
 
       throw new IsTTYError("Non-interactive environment");
     }
@@ -221,14 +212,14 @@ export const runCli = async (): Promise<CliResults> => {
       },
     };
   } catch (err) {
-    // If the user is not calling create-t3-app from an interactive terminal, inquirer will throw an IsTTYError
-    // If this happens, we catch the error, tell the user what has happened, and then continue to run the program with a default t3 app
+    // If the user is not calling create-zcrm-widget from an interactive terminal, inquirer will throw an IsTTYError
+    // If this happens, we catch the error, tell the user what has happened, and then continue to run the program with a default widget
     if (err instanceof IsTTYError) {
       logger.warn(`
-  ${CREATE_T3_APP} needs an interactive terminal to provide options`);
+  ${CREATE_ZCRM_WIDGET} needs an interactive terminal to provide options`);
 
       const shouldContinue = await p.confirm({
-        message: `Continue scaffolding a default T3 app?`,
+        message: `Continue scaffolding a default widget?`,
         initialValue: true,
       });
 
@@ -237,7 +228,7 @@ export const runCli = async (): Promise<CliResults> => {
         process.exit(0);
       }
 
-      logger.info(`Bootstrapping a default T3 app in ./${cliResults.appName}`);
+      logger.info(`Bootstrapping a default widget in ./${cliResults.appName}`);
     } else {
       throw err;
     }

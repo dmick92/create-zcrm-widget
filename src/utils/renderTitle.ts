@@ -3,23 +3,20 @@ import gradient from "gradient-string";
 import { TITLE_TEXT } from "~/consts.js";
 import { getUserPkgManager } from "~/utils/getUserPkgManager.js";
 
-// colors brought in from vscode poimandres theme
-const poimandresTheme = {
-  blue: "#add7ff",
-  cyan: "#89ddff",
-  green: "#5de4c7",
-  magenta: "#fae4fc",
-  red: "#d0679d",
-  yellow: "#fffac2",
+const zohoTheme = {
+  red: "#E42527",
+  green: "#089949",
+  blue: "#226DB4",
+  yellow: "#F9B21D",
 };
 
 export const renderTitle = () => {
-  const t3Gradient = gradient(Object.values(poimandresTheme));
+  const g = gradient(Object.values(zohoTheme));
 
   // resolves weird behavior where the ascii is offset
   const pkgManager = getUserPkgManager();
   if (pkgManager === "yarn" || pkgManager === "pnpm") {
     console.log("");
   }
-  console.log(t3Gradient.multiline(TITLE_TEXT));
+  console.log(g.multiline(TITLE_TEXT));
 };
