@@ -39,10 +39,11 @@
     "lint:fix": "pnpm lint --fix",
     "format": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ../.gitignore --ignore-unknown --no-error-on-unmatched-pattern --write",
     "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ../.gitignore --ignore-unknown --no-error-on-unmatched-pattern --check",
+    "check": "npm lint typecheck format:check",
     "release": "changeset version",
-    "pub:beta": "pnpm build && npm publish --tag beta",
-    "pub:next": "pnpm build && npm publish --tag next",
-    "pub:release": "pnpm build && npm publish"
+    "pub:beta": "build && npm publish --tag beta",
+    "pub:next": "build && npm publish --tag next",
+    "pub:release": "build && npm publish"
   },
   "dependencies": {
     "@changesets/cli": "^2.27.7",
