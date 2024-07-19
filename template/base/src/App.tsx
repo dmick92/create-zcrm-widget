@@ -5,7 +5,7 @@ import './App.css'
 
 const ZOHO = window.ZOHO
 
-function App() {
+function App(data: any) {
   const [count, setCount] = useState(0)
 
   return (

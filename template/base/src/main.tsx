@@ -16,7 +16,7 @@ declare global {
 window.ZOHO.embeddedApp.on("PageLoad", function (data) {
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
-      <App />
+      <App data={data} />
     </React.StrictMode>,
   )
 })
