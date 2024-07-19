@@ -20,10 +20,7 @@ interface CliFlags {
   importAlias: string;
 
   /** @internal Used in CI. */
-  CI: boolean;
-  /** @internal Used in CI. */
   tailwind: boolean;
-  /** @internal Used in CI. */
 }
 
 interface CliResults {
@@ -39,7 +36,6 @@ const defaultOptions: CliResults = {
     noGit: false,
     noInstall: false,
     default: false,
-    CI: false,
     tailwind: false,
     importAlias: "~/",
   },
@@ -70,12 +66,6 @@ export const runCli = async (): Promise<CliResults> => {
       "Bypass the CLI and use all default options to bootstrap a new zcrm-widget",
       false
     )
-    /** START CI-FLAGS */
-    /**
-     * @experimental Used for CI E2E tests. If any of the following option-flags are provided, we
-     *               skip prompting.
-     */
-    .option("--CI", "Boolean value if we're running in CI", false)
     /** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
     .option(
       "--tailwind [boolean]",

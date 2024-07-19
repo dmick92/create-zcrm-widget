@@ -31,7 +31,7 @@ const main = async () => {
   const npmVersion = await getNpmVersion();
   const pkgManager = getUserPkgManager();
   renderTitle();
-  //npmVersion && renderVersionWarning(npmVersion);
+  npmVersion && renderVersionWarning(npmVersion);
 
   const {
     appName,
