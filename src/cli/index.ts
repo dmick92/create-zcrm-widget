@@ -136,9 +136,9 @@ export const runCli = async (): Promise<CliResults> => {
         }),
         framework: () => {
           return p.select({
-            message: "Which framework would you like to use?",
+            message: "Which framework would you like to use? (Vanilla HTML/CSS/JS coming soon)",
             options: [
-              { value: "none", label: "None" },
+              // { value: "none", label: "None" },
               { value: "react", label: "React" },
               // { value: "vue", label: "Vue" },
               // { value: "svelte", label: "Svelte" },
@@ -163,13 +163,13 @@ export const runCli = async (): Promise<CliResults> => {
         },
         versioning: () => {
           return p.select({
-            message: "What versioning system would you like to use?",
+            message: "What versioning system would you like to use? (Only supported in Github)",
             options: [
-              { value: "none", label: "None" },
-              { value: "basic", label: "Basic" },
-              { value: "semver", label: "Semantic Versioning(@changesets/cli)" },
+              { value: "none", label: "None or BYO" },
+              { value: "basic", label: "Basic (Recommended - Will version and build your app)" },
+              //{ value: "semver", label: "Semantic Versioning(@changesets/cli)" },
             ],
-            initialValue: "none",
+            initialValue: "basic",
           })
         },
         ...(!cliResults.flags.noGit && {

@@ -5,12 +5,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/t3-oss/create-t3-app.git",
+    "url": "https://github.com/dmick92/cli-testing.git",
     "directory": "cli"
   },
   "keywords": [
+    "zoho",
+    "sigma",
     "tailwind",
-    "tRPC",
     "typescript"
   ],
   "type": "module",
@@ -22,8 +23,6 @@
     "dist",
     "template",
     "README.md",
-    "LICENSE",
-    "CHANGELOG.md",
     ".yarnrc.yml",
     "package.json"
   ],
@@ -65,7 +64,6 @@
     "prettier-plugin-tailwindcss": "^0.6.5",
     "tsup": "^6.7.0",
     "type-fest": "^3.13.1",
-    "typescript": "^5.5.3",
-    "zod": "^3.23.8"
+    "typescript": "^5.5.3"
   }
 }
