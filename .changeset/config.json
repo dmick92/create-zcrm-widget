@@ -1,11 +1,16 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.2/schema.json",
-  "changelog": "@changesets/cli/changelog",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "dmick92/create-zcrm-widget" }
+  ],
+  "changelogFiles": ["CHANGELOG.md"],
   "commit": false,
   "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": [],
+  "changedFilePatterns": ["src/**", "template/**"]
 }
