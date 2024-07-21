@@ -1,15 +1,8 @@
-import fs from "fs";
 import path from "path";
 
-import { PKG_ROOT } from "~/consts.js";
 import { installPackages } from "~/helpers/installPackages.js";
 import { scaffoldProject } from "~/helpers/scaffoldProject.js";
-import {
-  selectAppFile,
-  selectIndexFile,
-  selectLayoutFile,
-  selectPageFile,
-} from "~/helpers/selectBoilerplate.js";
+
 import {
   type PkgInstallerMap,
 } from "~/installers/index.js";
@@ -32,7 +25,6 @@ export const createProject = async ({
   const pkgManager = getUserPkgManager();
   const projectDir = path.resolve(process.cwd(), projectName);
 
-  // Bootstraps the base Next.js application
   await scaffoldProject({
     projectName,
     projectDir,
@@ -50,37 +42,6 @@ export const createProject = async ({
     packages,
     noInstall,
   });
-
-  // // Select necessary _app,index / layout,page files
-  // if (appRouter) {
-  //   // Replace next.config
-  //   fs.copyFileSync(
-  //     path.join(PKG_ROOT, "template/extras/config/next-config-appdir.js"),
-  //     path.join(projectDir, "next.config.js")
-  //   );
-
-  //   selectLayoutFile({ projectDir, packages });
-  //   selectPageFile({ projectDir, packages });
-  // } else {
-  //   selectAppFile({ projectDir, packages });
-  //   selectIndexFile({ projectDir, packages });
-  // }
-  // selectAppFile({ projectDir, packages });
-  // selectIndexFile({ projectDir, packages });
-  // // If no tailwind, select use css modules
-  if (!packages.tailwind.inUse) {
-    const indexModuleCss = path.join(
-      PKG_ROOT,
-      "template/extras/src/index.module.css"
-    );
-    const indexModuleCssDest = path.join(
-      projectDir,
-      "src",
-      //appRouter ? "app" : "pages",
-      "index.module.css"
-    );
-    fs.copyFileSync(indexModuleCss, indexModuleCssDest);
-  }
 
   return projectDir;
 };

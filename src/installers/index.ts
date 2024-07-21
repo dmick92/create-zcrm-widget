@@ -1,4 +1,3 @@
-import { envVariablesInstaller } from "~/installers/envVars.js";
 import { tailwindInstaller } from "~/installers/tailwind.js";
 import { type PackageManager } from "~/utils/getUserPkgManager.js";
 import { dynamicEslintInstaller } from "./eslint.js";
@@ -7,7 +6,6 @@ import { dynamicEslintInstaller } from "./eslint.js";
 // Should increase extensibility in the future
 export const availablePackages = [
   "tailwind",
-  "envVariables",
   "eslint",
 ] as const;
 export type AvailablePackages = (typeof availablePackages)[number];
@@ -36,10 +34,6 @@ export const buildPkgInstallerMap = (
   tailwind: {
     inUse: packages.includes("tailwind"),
     installer: tailwindInstaller,
-  },
-  envVariables: {
-    inUse: true,
-    installer: envVariablesInstaller,
   },
   eslint: {
     inUse: true,

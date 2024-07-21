@@ -1,5 +1,4 @@
 import * as p from "@clack/prompts";
-import chalk from "chalk";
 import { Command } from "commander";
 
 import { CREATE_ZCRM_WIDGET, DEFAULT_APP_NAME } from "~/consts.js";
@@ -66,19 +65,16 @@ export const runCli = async (): Promise<CliResults> => {
       "Bypass the CLI and use all default options to bootstrap a new zcrm-widget",
       false
     )
-    /** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
     .option(
-      "--tailwind [boolean]",
-      "Experimental: Boolean value if we should install Tailwind CSS. Must be used in conjunction with `--CI`.",
-      (value) => !!value && value !== "false"
+      "--tailwind",
+      "Explicitly tell the CLI to install Tailwind CSS.",
+      false
     )
-    /** @experimental - Used for CI E2E tests. Used in conjunction with `--CI` to skip prompting. */
     .option(
       "-i, --import-alias",
       "Explicitly tell the CLI to use a custom import alias",
       defaultOptions.flags.importAlias
     )
-    /** END CI-FLAGS */
     .version(getVersion(), "-v, --version", "Display the version number")
     .parse(process.argv);
 
@@ -137,11 +133,14 @@ export const runCli = async (): Promise<CliResults> => {
             initialValue: "typescript",
           });
         },
-        styling: () => {
-          return p.confirm({
-            message: "Will you be using Tailwind CSS for styling?",
-          });
-        },
+
+        ...(!cliResults.flags.tailwind && {
+          styling: () => {
+            return p.confirm({
+              message: "Will you be using Tailwind CSS for styling?",
+            });
+          },
+        }),
         versioning: () => {
           return p.select({
             message: "What versioning system would you like to use? (Only supported in Github)",
@@ -199,6 +198,7 @@ export const runCli = async (): Promise<CliResults> => {
         noGit: !project.git || cliResults.flags.noGit,
         noInstall: !project.install || cliResults.flags.noInstall,
         importAlias: project.importAlias ?? cliResults.flags.importAlias,
+        tailwind: project.styling ?? cliResults.flags.tailwind,
       },
     };
   } catch (err) {
