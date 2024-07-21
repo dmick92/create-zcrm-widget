@@ -5,7 +5,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmick92/cli-testing.git",
+    "url": "https://github.com/dmick92/create-zcrm-widget.git",
     "directory": "cli"
   },
   "keywords": [
