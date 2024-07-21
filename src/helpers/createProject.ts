@@ -1,7 +1,5 @@
-import fs from "fs";
 import path from "path";
 
-import { PKG_ROOT } from "~/consts.js";
 import { installPackages } from "~/helpers/installPackages.js";
 import { scaffoldProject } from "~/helpers/scaffoldProject.js";
 
@@ -27,7 +25,6 @@ export const createProject = async ({
   const pkgManager = getUserPkgManager();
   const projectDir = path.resolve(process.cwd(), projectName);
 
-  // Bootstraps the base Next.js application
   await scaffoldProject({
     projectName,
     projectDir,
@@ -45,20 +42,6 @@ export const createProject = async ({
     packages,
     noInstall,
   });
-
-  // If no tailwind, select use css modules
-  if (!packages.tailwind.inUse) {
-    const indexModuleCss = path.join(
-      PKG_ROOT,
-      "template/extras/src/index.module.css"
-    );
-    const indexModuleCssDest = path.join(
-      projectDir,
-      "src",
-      "index.module.css"
-    );
-    fs.copyFileSync(indexModuleCss, indexModuleCssDest);
-  }
 
   return projectDir;
 };

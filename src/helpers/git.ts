@@ -91,7 +91,7 @@ export const initializeGit = async (projectDir: string) => {
     const initializeChildGitRepo = await p.confirm({
       message: `${chalk.redBright.bold(
         "Warning:"
-      )} "${dirName}" is already in a git worktree. Would you still like to initialize a new git repository in this directory?`,
+      )} "${dirName}" is already in a git work tree. Would you still like to initialize a new git repository in this directory?`,
       initialValue: false,
     });
     if (!initializeChildGitRepo) {
