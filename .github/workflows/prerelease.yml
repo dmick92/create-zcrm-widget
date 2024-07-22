@@ -16,7 +16,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: ./.github/actions/setup
+      - uses: actions/setup-node@v4
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Modify package.json version
         run: node .github/version-script-beta.js
