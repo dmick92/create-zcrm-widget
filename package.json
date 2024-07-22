@@ -41,9 +41,9 @@
     "format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ../.gitignore --ignore-unknown --no-error-on-unmatched-pattern --check",
     "check": "npm lint typecheck format:check",
     "release": "changeset version",
-    "pub:beta": "build && npm publish --tag beta",
-    "pub:next": "build && npm publish --tag next",
-    "pub:release": "build && npm publish"
+    "pub:beta": "npm run build && npm publish --tag beta",
+    "pub:next": "npm run build && npm publish --tag next",
+    "pub:release": "npm run build && npm publish"
   },
   "dependencies": {
     "@changesets/cli": "^2.27.7",
