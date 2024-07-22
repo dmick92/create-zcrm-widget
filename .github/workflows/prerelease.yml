@@ -35,8 +35,6 @@ jobs:
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
-        with:
-          path: cli
 
       - name: Upload packaged artifact
         uses: actions/upload-artifact@v4
