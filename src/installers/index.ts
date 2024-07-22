@@ -10,6 +10,9 @@ export const availablePackages = [
 ] as const;
 export type AvailablePackages = (typeof availablePackages)[number];
 
+export const availableFrameworks = ["react", "vue"] as const;
+export type AvailableFrameworks = (typeof availableFrameworks)[number];
+
 export interface InstallerOptions {
   projectDir: string;
   pkgManager: PackageManager;
@@ -17,6 +20,7 @@ export interface InstallerOptions {
   packages?: PkgInstallerMap;
   projectName: string;
   scopedAppName: string;
+  framework: AvailableFrameworks;
 }
 
 export type Installer = (opts: InstallerOptions) => void;
