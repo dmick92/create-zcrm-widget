@@ -39,5 +39,5 @@ jobs:
       - name: Upload packaged artifact
         uses: actions/upload-artifact@v4
         with:
-          name: npm-package-create-t3-app@${{ steps.package-version.outputs.current-version }}-pr-${{ github.event.number }} # encode the PR number into the artifact name
+          name: npm-package-create-zcrm-widget@${{ steps.package-version.outputs.current-version }}-pr-${{ github.event.number }} # encode the PR number into the artifact name
           path: /dist/index.js
