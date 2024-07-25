@@ -5,10 +5,13 @@ name: Release - Beta
 
 on:
   pull_request:
+    types: [labeled]
     branches:
       - main
 jobs:
   prerelease:
+    if: |
+      contains(github.event.pull_request.labels.*.name, 'release-beta')
     name: Build & Publish a beta release to NPM
     runs-on: ubuntu-latest
 
