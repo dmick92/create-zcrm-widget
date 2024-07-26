@@ -37,7 +37,6 @@ const main = async () => {
     appName,
     packages,
     flags: { noGit, noInstall, importAlias },
-    framework,
   } = await runCli();
 
   const usePackages = buildPkgInstallerMap(packages);
@@ -51,7 +50,6 @@ const main = async () => {
     packages: usePackages,
     importAlias,
     noInstall,
-    framework
   });
 
   // Write name to package.json

@@ -4,7 +4,6 @@ import { installPackages } from "~/helpers/installPackages.js";
 import { scaffoldProject } from "~/helpers/scaffoldProject.js";
 
 import {
-  type AvailableFrameworks,
   type PkgInstallerMap,
 } from "~/installers/index.js";
 import { getUserPkgManager } from "~/utils/getUserPkgManager.js";
@@ -15,7 +14,6 @@ interface CreateProjectOptions {
   scopedAppName: string;
   noInstall: boolean;
   importAlias: string;
-  framework: AvailableFrameworks;
 }
 
 export const createProject = async ({
@@ -23,7 +21,6 @@ export const createProject = async ({
   scopedAppName,
   packages,
   noInstall,
-  framework
 }: CreateProjectOptions) => {
   const pkgManager = getUserPkgManager();
   const projectDir = path.resolve(process.cwd(), projectName);
@@ -34,7 +31,6 @@ export const createProject = async ({
     pkgManager,
     scopedAppName,
     noInstall,
-    framework
   });
 
   // Install the selected packages
@@ -45,7 +41,6 @@ export const createProject = async ({
     pkgManager,
     packages,
     noInstall,
-    framework
   });
 
   return projectDir;

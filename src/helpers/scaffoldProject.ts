@@ -14,20 +14,8 @@ export const scaffoldProject = async ({
   projectDir,
   pkgManager,
   noInstall,
-  framework
 }: InstallerOptions) => {
-  let srcDir = path.join(PKG_ROOT, "template/base");
-
-  switch (framework) {
-    case "react":
-      srcDir = path.join(srcDir, "react");
-      break;
-    case "vue":
-      srcDir = path.join(srcDir, "vue");
-      break;
-    default:
-      throw new Error(`Unknown framework: ${framework}`);
-  }
+  const srcDir = path.join(PKG_ROOT, "template/base");
 
   if (!noInstall) {
     logger.info(`\nUsing: ${chalk.cyan.bold(pkgManager)}\n`);
