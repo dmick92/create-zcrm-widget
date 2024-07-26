@@ -19,8 +19,6 @@ interface CliFlags {
   noInstall: boolean;
   default: boolean;
   importAlias: string;
-
-  /** @internal Used in CI. */
   tailwind: boolean;
 }
 
