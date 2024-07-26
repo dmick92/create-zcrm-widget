@@ -11,6 +11,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": [],
-  "changedFilePatterns": ["src/**", "template/**"]
+  "ignore": []
 }
