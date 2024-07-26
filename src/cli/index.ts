@@ -3,8 +3,6 @@ import { Command } from "commander";
 
 import { CREATE_ZCRM_WIDGET, DEFAULT_APP_NAME } from "~/consts.js";
 import {
-  AvailableFrameworks,
-  availableFrameworks,
   type AvailablePackages,
 } from "~/installers/index.js";
 import { getVersion } from "~/utils/getVersion.js";
@@ -28,7 +26,6 @@ interface CliResults {
   appName: string;
   packages: AvailablePackages[];
   flags: CliFlags;
-  framework: AvailableFrameworks;
 }
 
 const defaultOptions: CliResults = {
@@ -41,7 +38,6 @@ const defaultOptions: CliResults = {
     tailwind: false,
     importAlias: "~/",
   },
-  framework: availableFrameworks[0],
 };
 
 export const runCli = async (): Promise<CliResults> => {
@@ -121,7 +117,7 @@ export const runCli = async (): Promise<CliResults> => {
             options: [
               // { value: "none", label: "None" },
               { value: "react", label: "React" },
-              { value: "vue", label: "Vue" },
+              // { value: "vue", label: "Vue" },
               // { value: "svelte", label: "Svelte" },
             ],
             initialValue: "react",
@@ -197,7 +193,6 @@ export const runCli = async (): Promise<CliResults> => {
     return {
       appName: project.name ?? cliResults.appName,
       packages,
-      framework: project.framework as AvailableFrameworks,
       flags: {
         ...cliResults.flags,
         noGit: !project.git || cliResults.flags.noGit,
