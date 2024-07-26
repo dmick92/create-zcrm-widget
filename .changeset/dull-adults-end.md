@@ -2,4 +2,4 @@
 "create-zcrm-widget": patch
 ---
 
-test trigger
+updated ci
