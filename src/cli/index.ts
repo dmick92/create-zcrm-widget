@@ -125,16 +125,16 @@ export const runCli = async (): Promise<CliResults> => {
             initialValue: "react",
           });
         },
-        language: () => {
-          return p.select({
-            message: "Will you be using TypeScript or JavaScript? (JS is not supported yet)",
-            options: [
-              { value: "typescript", label: "TypeScript" },
-              // { value: "javascript", label: "JavaScript" },
-            ],
-            initialValue: "typescript",
-          });
-        },
+        // language: () => {
+        //   return p.select({
+        //     message: "Will you be using TypeScript or JavaScript? (JS is not supported yet)",
+        //     options: [
+        //       { value: "typescript", label: "TypeScript" },
+        //       // { value: "javascript", label: "JavaScript" },
+        //     ],
+        //     initialValue: "typescript",
+        //   });
+        // },
 
         ...(!cliResults.flags.tailwind && {
           styling: () => {
